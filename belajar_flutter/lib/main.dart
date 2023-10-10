@@ -182,60 +182,49 @@ Widget build(BuildContext context) {
     appBar: AppBar(
       title: Text('Book Recognize'),
       backgroundColor: Color.fromARGB(255, 138, 177, 229),
+      // bottom: PreferredSize(
+      //   preferredSize: Size.fromHeight(120.0), // Sesuaikan dengan tinggi gambar dan teks Anda
+      //   child: Column(
+      //     children: [
+      //       Image.asset(
+      //         'assets/images/splash.png',
+      //         width: 300,
+      //         height: 500,
+      //         fit: BoxFit.contain,
+      //       ),
+      //       Text(
+      //         "Let's start scan your book",
+      //         textAlign: TextAlign.center,
+      //         style: TextStyle(
+      //           fontSize: 35.0,
+      //           color: Color.fromARGB(255, 138, 177, 229),
+      //         ),
+      //       ),
+      //     ],
+      //   ),
+      // ),
     ),
-    body: _loading
-        ? CircularProgressIndicator()
-        : SingleChildScrollView(
-            child: Column(
+   body: _loading
+          ? CircularProgressIndicator()
+          : Column(
               children: <Widget>[
-                Image.asset(
-                  'assets/images/splash.png', 
-                  width: 300, 
-                  height: 500,
-                  fit: BoxFit.contain,
-                ),
-                Text(
-                  "Let's start scan your book", 
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 35.0,
-                    color: Color.fromARGB(255, 138, 177, 229),
-                  ),
-                ),
                 _image == null ? Container() : Image.file(_image!),
                 SizedBox(height: 20),
-
-                // _cameraController != null
-                // ? CameraPreview(_cameraController!)
-                // : Container(), 
-
                 _recognitions == null || _recognitions!.isEmpty
                     ? Container()
                     : Column(
                         children: _recognitions!.map((res) {
-                          return Column(
-                            children: [
-                              Image.asset(
-                                'assets/images/splash.png', // Ganti dengan path gambar Anda
-                                width: 100, // Sesuaikan ukuran gambar
-                                height: 100,
-                              ),
-                              Text(
-                                "${res["label"]} ${res["text"] ?? res["labelValue"]}",
-                                style: TextStyle(
-                                  fontSize: 20.0,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.blue,
-                                ),
-                              ),
-                            ],
+                          return Text(
+                            "${res["label"]} ${res["text"] ?? res["labelValue"]}",
+                            style: TextStyle(
+                              fontSize: 20.0,
+                              fontWeight: FontWeight.bold,
+                            ),
                           );
                         }).toList(),
                       ),
-                SizedBox(height: 20), // Spasi tambahan
               ],
             ),
-          ),
   floatingActionButton: Column(
   mainAxisAlignment: MainAxisAlignment.end,
   children: [
